@@ -3,13 +3,13 @@ data "aws_availability_zones" "available" {
 }
 
 module "vpc" {
-    source = "terraform-aws-modules/vpc/aws"
+  source = "terraform-aws-modules/vpc/aws"
 
-    name                    = var.vpc_name
-    cidr                    = var.vpc_cidr
+  name = var.vpc_name
+  cidr = var.vpc_cidr
 
-    azs                     = data.aws_availability_zones.available[*].names
-    private_subnets         = var.private_subnets
-    public_subnets          = var.public_subnets
-  
+  azs             = data.aws_availability_zones.available[*].name
+  private_subnets = var.private_subnets
+  public_subnets  = var.public_subnets
+
 }
