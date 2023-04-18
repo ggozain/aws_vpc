@@ -3,6 +3,16 @@ variable "aws_region" {
   description = "The AWS Region where to create VPC"
 }
 
+variable "tf_cloud_organization" {
+  type        = string
+  description = "The organisation of Terraform Cloud where remote state is stored"
+}
+
+variable "tf_cloud_workspace" {
+  type        = string
+  description = "The workspace of Terraform Cloud where remote state is stored"
+}
+
 variable "azs" {
   type        = list(string)
   description = "List of availability zones to be deployed."

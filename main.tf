@@ -15,7 +15,7 @@ module "vpc" {
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   use_ipam_pool        = var.use_ipam_pool
-  ipv4_ipam_pool_id    = data.tfe_outputs.ipam.ipam_id
+  ipv4_ipam_pool_id    = data.tfe_outputs.ipam.values.ipam_id
   ipv4_netmask_length  = var.ipv4_netmask_length
 
   azs             = var.azs
