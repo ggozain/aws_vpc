@@ -1,3 +1,8 @@
+data "tfe_outputs" "ipam" {
+  organization = var.tf_cloud_organization
+  workspace    = var.tf_cloud_workspace
+}
+
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -6,8 +11,12 @@ module "vpc" {
     "Project"     = var.project_name
     "Environment" = var.infra_env
   }
-  name = "${var.infra_env}-${var.aws_region}-vpc"
-  cidr = var.vpc_cidr
+  name                 = "${var.infra_env}-${var.aws_region}-vpc"
+  enable_dns_support   = var.enable_dns_support
+  enable_dns_hostnames = var.enable_dns_hostnames
+  use_ipam_pool        = var.use_ipam_pool
+  ipv4_ipam_pool_id    = data.tfe_outputs.ipam.ipam_id
+  ipv4_netmask_length  = var.ipv4_netmask_length
 
   azs             = var.azs
   private_subnets = var.private_subnets

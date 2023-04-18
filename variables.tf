@@ -8,9 +8,34 @@ variable "azs" {
   description = "List of availability zones to be deployed."
 }
 
-variable "vpc_cidr" {
+variable "use_ipam_pool" {
+  description = "Determines whether IPAM pool is used for CIDR allocation"
+  type        = bool
+  default     = false
+}
+
+variable "ipv4_ipam_pool_id" {
+  description = "(Optional) The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR"
   type        = string
-  description = "Main CIDR Block for VPC"
+  default     = null
+}
+
+variable "ipv4_netmask_length" {
+  description = "(Optional) The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id"
+  type        = number
+  default     = null
+}
+
+variable "enable_dns_support" {
+  description = "Should be true to enable DNS support in the VPC"
+  type        = bool
+  default     = true
+}
+
+variable "enable_dns_hostnames" {
+  description = "Should be true to enable DNS hostnames in the VPC"
+  type        = bool
+  default     = true
 }
 
 variable "private_subnets" {
