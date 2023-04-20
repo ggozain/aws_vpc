@@ -19,12 +19,12 @@ module "vpc" {
   ipv4_netmask_length  = var.ipv4_netmask_length
 
   azs             = var.azs
-  # private_subnets = var.private_subnets
+  private_subnets = var.private_subnets
   private_subnet_tags = {
     "kubernetes.io/cluster/${var.expected_eks_cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"                        = 1
   }
-  # public_subnets = var.public_subnets
+  public_subnets = var.public_subnets
   public_subnet_tags = {
     "kubernetes.io/cluster/${var.expected_eks_cluster_name}" = "shared"
     "kubernetes.io/role/elb"                                 = 1
