@@ -3,11 +3,6 @@ variable "aws_region" {
   description = "The AWS Region where to create VPC"
 }
 
-variable "azs" {
-  type        = list(string)
-  description = "List of availability zones to deploy"
-}
-
 variable "tf_cloud_organization" {
   type        = string
   description = "The organisation of Terraform Cloud where remote state is stored"
@@ -36,6 +31,12 @@ variable "ipv4_netmask_length" {
   default     = null
 }
 
+variable "enable_nat_gateway" {
+  description = "Should be true to enable nat gateway support in the VPC"
+  type        = bool
+  default     = true
+}
+
 variable "enable_dns_support" {
   description = "Should be true to enable DNS support in the VPC"
   type        = bool
@@ -47,16 +48,6 @@ variable "enable_dns_hostnames" {
   type        = bool
   default     = true
 }
-
-# variable "private_subnets" {
-#   type        = list(any)
-#   description = "List of private subnets"
-# }
-
-# variable "public_subnets" {
-#   type        = list(any)
-#   description = "List of public subnets"
-# }
 
 variable "organisation" {
   type        = string

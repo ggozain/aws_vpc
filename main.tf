@@ -8,6 +8,7 @@ data "aws_availability_zones" "available" {}
 locals {
 
   preview_partition = cidrsubnets(data.tfe_outputs.ipam.values.ipam_parent_pool_cidr, 2, 2, 2)
+  azs               = slice(data.aws_availability_zones.available.names, 0, 3)
 
 }
 
@@ -25,6 +26,7 @@ module "vpc" {
     "Environment" = var.infra_env
   }
   name                 = "${var.infra_env}-${var.aws_region}-vpc"
+  enable_nat_gateway   = var.enable_nat_gateway
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   use_ipam_pool        = var.use_ipam_pool
@@ -32,7 +34,7 @@ module "vpc" {
   ipv4_netmask_length  = var.ipv4_netmask_length
   cidr                 = data.tfe_outputs.ipam.values.ipam_parent_pool_cidr
 
-  azs             = var.azs
+  azs             = local.azs
   private_subnets = cidrsubnets(local.preview_partition[0], 2, 2, 2)
   public_subnets  = cidrsubnets(local.preview_partition[1], 2, 2, 2)
   private_subnet_tags = {
