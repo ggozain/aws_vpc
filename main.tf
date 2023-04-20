@@ -3,6 +3,19 @@ data "tfe_outputs" "ipam" {
   workspace    = var.tf_cloud_workspace
 }
 
+data "aws_availability_zones" "available" {}
+
+locals {
+
+  preview_partition = cidrsubnets(data.tfe_outputs.ipam.values.ipam_parent_pool_cidr, 2, 2, 2)
+
+}
+
+
+resource "aws_vpc_ipam_preview_next_cidr" "this" {
+  ipam_pool_id   = data.tfe_outputs.ipam.values.ipam_parent_pool_id
+  netmask_length = var.ipv4_netmask_length
+}
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -17,14 +30,15 @@ module "vpc" {
   use_ipam_pool        = var.use_ipam_pool
   ipv4_ipam_pool_id    = data.tfe_outputs.ipam.values.ipam_parent_pool_id
   ipv4_netmask_length  = var.ipv4_netmask_length
+  cidr                 = data.tfe_outputs.ipam.values.ipam_parent_pool_cidr
 
   azs             = var.azs
-  private_subnets = var.private_subnets
+  private_subnets = cidrsubnets(local.preview_partition[0], 2, 2, 2)
+  public_subnets  = cidrsubnets(local.preview_partition[1], 2, 2, 2)
   private_subnet_tags = {
     "kubernetes.io/cluster/${var.expected_eks_cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"                        = 1
   }
-  public_subnets = var.public_subnets
   public_subnet_tags = {
     "kubernetes.io/cluster/${var.expected_eks_cluster_name}" = "shared"
     "kubernetes.io/role/elb"                                 = 1

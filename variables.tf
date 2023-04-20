@@ -3,6 +3,11 @@ variable "aws_region" {
   description = "The AWS Region where to create VPC"
 }
 
+variable "azs" {
+  type        = list(string)
+  description = "List of availability zones to deploy"
+}
+
 variable "tf_cloud_organization" {
   type        = string
   description = "The organisation of Terraform Cloud where remote state is stored"
@@ -11,11 +16,6 @@ variable "tf_cloud_organization" {
 variable "tf_cloud_workspace" {
   type        = string
   description = "The workspace of Terraform Cloud where remote state is stored"
-}
-
-variable "azs" {
-  type        = list(string)
-  description = "List of availability zones to be deployed."
 }
 
 variable "use_ipam_pool" {
@@ -48,15 +48,15 @@ variable "enable_dns_hostnames" {
   default     = true
 }
 
-variable "private_subnets" {
-  type        = list(any)
-  description = "List of private subnets"
-}
+# variable "private_subnets" {
+#   type        = list(any)
+#   description = "List of private subnets"
+# }
 
-variable "public_subnets" {
-  type        = list(any)
-  description = "List of public subnets"
-}
+# variable "public_subnets" {
+#   type        = list(any)
+#   description = "List of public subnets"
+# }
 
 variable "organisation" {
   type        = string
