@@ -37,6 +37,18 @@ variable "enable_nat_gateway" {
   default     = true
 }
 
+variable "single_nat_gateway" {
+  description = "Single nat gateway support in the VPC"
+  type        = bool
+  default     = true
+}
+
+variable "one_nat_gateway_per_az" {
+  description = "Should be true to enable nat gateway support in the VPC"
+  type        = bool
+  default     = true
+}
+
 variable "enable_dns_support" {
   description = "Should be true to enable DNS support in the VPC"
   type        = bool

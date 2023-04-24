@@ -27,6 +27,8 @@ module "vpc" {
   }
   name                  = "${var.infra_env}-${var.aws_region}-vpc"
   enable_nat_gateway    = var.enable_nat_gateway
+  single_nat_gateway    = var.single_nat_gateway
+  one_nat_gateway_per_az = var.one_nat_gateway_per_az 
   enable_dns_support    = var.enable_dns_support
   enable_dns_hostnames  = var.enable_dns_hostnames
   use_ipam_pool         = var.use_ipam_pool
