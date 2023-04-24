@@ -12,3 +12,8 @@ output "private_subnet_id" {
   description = "The ID of the public subnets created by the VPC module"
   value       = module.vpc.private_subnets
 }
+
+output "vpc_owner_id" {
+  description = "The ID of the public subnets created by the VPC module"
+  value       = module.vpc.vpc_owner_id
+}

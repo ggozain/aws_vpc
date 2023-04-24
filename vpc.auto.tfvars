@@ -10,4 +10,4 @@ use_ipam_pool             = true
 ipv4_netmask_length       = 20
 enable_dns_support        = true
 enable_dns_hostnames      = true
-enable_nat_gateway        = true
+enable_nat_gateway        = true   
