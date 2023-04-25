@@ -12,9 +12,9 @@ data "aws_vpc_ipam_preview_next_cidr" "previewed_cidr" {
 
 locals {
 
-  partition       = cidrsubnets(data.aws_vpc_ipam_preview_next_cidr.previewed_cidr.cidr, 2, 2)
-  private_subnets = cidrsubnets(local.partition[0], 2, 2)
-  public_subnets  = cidrsubnets(local.partition[1], 2, 2)
+  partition       = cidrsubnets(data.aws_vpc_ipam_preview_next_cidr.previewed_cidr.cidr, 0, 0)
+  private_subnets = cidrsubnets(local.partition[0], 2, 2, 2)
+  public_subnets  = cidrsubnets(local.partition[1], 2, 2, 2)
   azs             = slice(data.aws_availability_zones.available.names, 0, 3)
 
 }
@@ -36,7 +36,7 @@ module "vpc" {
   use_ipam_pool          = var.use_ipam_pool
   ipv4_ipam_pool_id      = data.tfe_outputs.ipam.values.ipam_child_pool_id
   ipv4_netmask_length    = var.ipv4_netmask_length
-  cidr                   = data.tfe_outputs.ipam.values.ipam_child_pool_cidr
+
 
   azs             = local.azs
   private_subnets = local.private_subnets
