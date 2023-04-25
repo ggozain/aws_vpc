@@ -35,7 +35,7 @@ module "vpc" {
   enable_dns_hostnames   = var.enable_dns_hostnames
   use_ipam_pool          = var.use_ipam_pool
   ipv4_ipam_pool_id      = data.tfe_outputs.ipam.values.ipam_child_pool_id
-  ipv4_netmask_length    = data.tfe_outputs.ipam.values.ipam_child_pool_netmask_length
+  ipv4_netmask_length    = var.ipv4_netmask_length
   cidr                   = data.tfe_outputs.ipam.values.ipam_child_pool_cidr
 
   azs             = local.azs
