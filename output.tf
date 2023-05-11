@@ -22,3 +22,8 @@ output "vpc_owner_id" {
   description = "The ID of the public subnets created by the VPC module"
   value       = module.vpc.vpc_owner_id
 }
+
+output "nat_gateway_id" {
+  description = "The NAT Gateway ID"
+  value       = module.vpc.natgw_ids
+}
