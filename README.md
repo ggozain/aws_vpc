@@ -35,8 +35,9 @@ To use these Terraform scripts with Terraform Cloud on AWS, follow the steps bel
   terraform init
 
 6. Log in to Terraform Cloud using the Terraform CLI:
-   ```shell
-   terraform login
+   
+  ```shell
+  terraform login
 
 
 7. In the Terraform Cloud web interface, create a new workspace and connect it to this repository.
