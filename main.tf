@@ -48,7 +48,7 @@ module "vpc" {
   azs             = local.azs
   private_subnets = local.private_subnets
   public_subnets  = local.public_subnets
-  intra_subnets   = local.intra_subnets
+  # intra_subnets   = local.intra_subnets
 
   private_subnet_tags = {
     "kubernetes.io/cluster/${var.expected_eks_cluster_name}" = "shared"
