@@ -16,13 +16,13 @@ To use these Terraform scripts with Terraform Cloud on AWS, follow the steps bel
 
 1. Clone this repository to your local machine using the following command:
 
-   ```shell
+    ```shell
    git clone https://github.com/ggozain/aws_vpc
 
 
 2. Change to the repository's directory:
 
-   ```shell
+    ```shell
    cd aws_vpc
 
 3. Configure the AWS IAM credentials by exporting the necessary environment variables or updating the `vpc.auto.tfvars` file with the appropriate values. Refer to the AWS documentation for details on the required variables.
@@ -31,12 +31,12 @@ To use these Terraform scripts with Terraform Cloud on AWS, follow the steps bel
 
 5. Initialize the Terraform project by running the following command:
 
-   ```shell
+    ```shell
    terraform init
 
+
 6. Log in to Terraform Cloud using the Terraform CLI:
-   
-   ```shell
+    ```shell
    terraform login
 
 7. In the Terraform Cloud web interface, create a new workspace and connect it to this repository.
