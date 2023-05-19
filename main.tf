@@ -18,7 +18,7 @@ locals {
   # cidrsubnets(local.partition[0], 2, 2, 2)
   public_subnets = [for i, n in local.azs : cidrsubnet(local.partition[1], 2, (i))]
   # cidrsubnets(local.partition[1], 2, 2, 2)
-  # intra_subnets = [for i, n in local.azs : cidrsubnet(local.partition[2], 2, (i))]
+  intra_subnets = [for i, n in local.azs : cidrsubnet(local.partition[2], 2, (i))]
   # cidrsubnets(local.partition[1], 2, 2, 2)
   name = "${var.infra_env}-${var.aws_region}-vpc"
 }
@@ -48,7 +48,7 @@ module "vpc" {
   azs             = local.azs
   private_subnets = local.private_subnets
   public_subnets  = local.public_subnets
-  # intra_subnets   = local.intra_subnets
+  intra_subnets   = local.intra_subnets
 
   private_subnet_tags = {
     "kubernetes.io/cluster/${var.expected_eks_cluster_name}" = "shared"
